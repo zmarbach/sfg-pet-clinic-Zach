@@ -1,13 +1,13 @@
 package com.improving.sfgpetclinic.services.map;
 
 import com.improving.sfgpetclinic.models.Owner;
-import com.improving.sfgpetclinic.services.CrudService;
+import com.improving.sfgpetclinic.services.OwnerService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
@@ -32,5 +32,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public Owner findById(Long id) {
         return findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }
