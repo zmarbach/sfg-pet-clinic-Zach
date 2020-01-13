@@ -1,5 +1,14 @@
-com\improving\sfgpetclinic\models\Owner.class
-com\improving\sfgpetclinic\models\Pet.class
+com\improving\sfgpetclinic\models\BaseEntity.class
+com\improving\sfgpetclinic\services\map\AbstractMapService.class
 com\improving\sfgpetclinic\models\Vet.class
-com\improving\sfgpetclinic\models\Person.class
+com\improving\sfgpetclinic\services\map\OwnerServiceMap.class
 com\improving\sfgpetclinic\models\PetType.class
+com\improving\sfgpetclinic\services\OwnerService.class
+com\improving\sfgpetclinic\models\Owner.class
+com\improving\sfgpetclinic\services\map\VetServiceMap.class
+com\improving\sfgpetclinic\services\map\PetServiceMap.class
+com\improving\sfgpetclinic\services\PetService.class
+com\improving\sfgpetclinic\services\VetService.class
+com\improving\sfgpetclinic\models\Pet.class
+com\improving\sfgpetclinic\models\Person.class
+com\improving\sfgpetclinic\services\CrudService.class
