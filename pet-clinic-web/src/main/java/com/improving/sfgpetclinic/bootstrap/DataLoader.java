@@ -1,10 +1,7 @@
 package com.improving.sfgpetclinic.bootstrap;
 
 import com.improving.sfgpetclinic.models.*;
-import com.improving.sfgpetclinic.services.OwnerService;
-import com.improving.sfgpetclinic.services.PetTypeService;
-import com.improving.sfgpetclinic.services.SpecialtyService;
-import com.improving.sfgpetclinic.services.VetService;
+import com.improving.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +15,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     //Spring will auto-execute this method once entire app is built
@@ -43,7 +42,7 @@ public class DataLoader implements CommandLineRunner {
         PetType savedDogPetType = petTypeService.save(dogType);
 
         PetType catType = new PetType();
-        dogType.setName("Cat");
+        catType.setName("Cat");
         PetType savedCatPetType = petTypeService.save(catType);
 
         Specialty radiology = new Specialty();
@@ -89,6 +88,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(rachelPet);
 
         ownerService.save(owner2);
+
+        Visit uglyCatVisit = new Visit();
+        uglyCatVisit.setDate(LocalDate.now());
+        uglyCatVisit.setDescription("first visit");
+        uglyCatVisit.setPet(rachelPet);
+
+        visitService.save(uglyCatVisit);
 
         System.out.println("Loaded Owners");
 
