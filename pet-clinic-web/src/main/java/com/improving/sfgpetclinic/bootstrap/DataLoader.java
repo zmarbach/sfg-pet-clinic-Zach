@@ -5,6 +5,7 @@ import com.improving.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 @Component
@@ -27,6 +28,7 @@ public class DataLoader implements CommandLineRunner {
 
     //Spring will auto-execute this method once entire app is built
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
         int count = petTypeService.findAll().size();
@@ -63,6 +65,8 @@ public class DataLoader implements CommandLineRunner {
         owner1.setAddress("123 Fake Street");
         owner1.setAddress("Fake City");
         owner1.setTelephone("1234567890");
+
+
 
         Pet rossPet = new Pet();
         rossPet.setName("Doggo");
