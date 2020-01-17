@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//must have this annotation if want to use @InjectMocks
+//must have this annotation if want to use @InjectMocks..otherwise need 2 additional lines of code in SetUp method (see below)
 @ExtendWith(MockitoExtension.class)
 class VetControllerTest {
     @Mock
