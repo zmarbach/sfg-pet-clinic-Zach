@@ -36,16 +36,14 @@ class OwnerJPAServiceTest {
 
     @Test
     void findByLastName() {
-        //TODO: why does builder create an owner with all null properties??
+        //arrange
         Owner returnedOwner = Owner.builder().id(1L).lastName(LAST_NAME).build();
-//        Owner returnedOwner = new Owner();
-//        returnedOwner.setId(1L);
-//        returnedOwner.setLastName(LAST_NAME);
-
         when(ownerRepository.findByLastName(any())).thenReturn(returnedOwner);
 
+        //act
         Owner smith = service.findByLastName(LAST_NAME);
 
+        //assert
         assertEquals(LAST_NAME, smith.getLastName());
     }
 

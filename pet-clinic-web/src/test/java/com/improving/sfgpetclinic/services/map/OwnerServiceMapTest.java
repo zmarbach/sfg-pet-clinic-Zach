@@ -62,14 +62,7 @@ class OwnerServiceMapTest {
     }
 
     @Test
-        // TODO: why does this test return NPE when using Owner builder? Builder creates owner where all properties are null...why?
     void findByLastName() {
-//        Owner newOwner = new Owner();
-//        newOwner.setLastName("Marbach");
-//        ownerServiceMap.save(newOwner);
-
-//        Owner returnedOwner = ownerServiceMap.findByLastName("Marbach");
-
         Owner returnedOwner = ownerServiceMap.findByLastName(mockLastName);
         assertNotNull(returnedOwner);
         assertEquals(mockLastName, returnedOwner.getLastName());

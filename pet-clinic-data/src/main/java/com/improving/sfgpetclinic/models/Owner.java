@@ -11,12 +11,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//@Builder
 
 @Entity
 @Table(name="owners")
 public class Owner extends Person {
 
+    //if have constructor then put @Builder above here...if no constructor then put @Builder above class
     @Builder
     public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets){
         super(id, firstName, lastName);
