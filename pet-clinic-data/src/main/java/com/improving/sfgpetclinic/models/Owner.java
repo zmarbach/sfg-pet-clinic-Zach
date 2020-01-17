@@ -11,8 +11,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString(exclude={"pets"})
 
 @Entity
 @Table(name="owners")

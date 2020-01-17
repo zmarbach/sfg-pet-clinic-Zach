@@ -13,9 +13,6 @@ public class SfgPetClinicApplication {
 	public static void main(String[] args) {
 		var context = SpringApplication.run(SfgPetClinicApplication.class, args);
 
-		var visitJPAService = context.getBean(VisitJPAService.class);
-
-		System.out.println(visitJPAService.findById(1L).toString());
 	}
 
 }
