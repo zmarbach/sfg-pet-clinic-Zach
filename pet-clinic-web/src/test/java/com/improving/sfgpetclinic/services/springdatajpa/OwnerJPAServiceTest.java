@@ -11,13 +11,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OwnerJPAServiceTest {
-    public static final String LAST_NAME = "Smith";
+    //very important to test the SERVICE in isolation.
+    // Mock all the dependencies and create fake data...then when dependency methods are called, return that fake data
+    //just testing if SERVICE methods get to the right methods on object dependencies (Ex: ownerRepository)
+    //use Mockito to tap into dependency objects methods and FORCE them to return what we want to test
+
     @Mock
     OwnerRepository ownerRepository;
 
@@ -30,14 +38,19 @@ class OwnerJPAServiceTest {
     @InjectMocks //this tells Mockito to inject the mocked objs above to create an instance of this service
     OwnerJPAService service;
 
+    public static final String LAST_NAME = "Smith";
+    public static final Long ID = 1L;
+
+    Owner returnedOwner;
+
     @BeforeEach
     void setUp() {
+        returnedOwner = Owner.builder().id(ID).lastName(LAST_NAME).build();
     }
 
     @Test
     void findByLastName() {
         //arrange
-        Owner returnedOwner = Owner.builder().id(1L).lastName(LAST_NAME).build();
         when(ownerRepository.findByLastName(any())).thenReturn(returnedOwner);
 
         //act
@@ -49,21 +62,89 @@ class OwnerJPAServiceTest {
 
     @Test
     void findAll() {
+        //arrange
+        Set<Owner> ownersSet = new HashSet<>();
+        ownersSet.add(returnedOwner);
+        ownersSet.add(Owner.builder().id(2L).lastName("Marbach").build());
+        when(ownerRepository.findAll()).thenReturn(ownersSet);
+
+        //act
+        Set<Owner> testingSet = service.findAll();
+
+        //assert
+        assertNotNull(ownersSet);
+        assertEquals(2, testingSet.size());
     }
 
     @Test
     void findById() {
+        //arrange
+        when(ownerRepository.findById(ID)).thenReturn(Optional.ofNullable(returnedOwner));
+
+        //act
+        Owner owner = service.findById(ID);
+
+        //assert
+        assertEquals(ID, owner.getId());
     }
 
     @Test
-    void save() {
+    void findByIdNotFound() {
+        //arrange
+        when(ownerRepository.findById(ID)).thenReturn(Optional.empty());
+
+        //act
+        Owner owner = service.findById(ID);
+
+        //assert
+        assertNull(owner);
+    }
+
+    @Test
+    void saveExisitingID() {
+        //arrange
+        Owner ownerToSave = Owner.builder().id(3L).build();
+        when(ownerRepository.save(any())).thenReturn(returnedOwner);
+
+        //act
+        var owner = service.save(ownerToSave);
+
+        //assert
+        assertEquals(returnedOwner.getId(), owner.getId());
+        assertNotNull(owner);
+    }
+
+    @Test
+    void saveNoID() {
+        //arrange
+        when(ownerRepository.save(any())).thenReturn(returnedOwner);
+
+        //act
+        var owner = service.save(returnedOwner);
+
+        //assert
+        assertNotNull(owner.getId());
     }
 
     @Test
     void delete() {
+        //arrange
+
+        //act
+        service.delete(returnedOwner);
+
+        //assert
+        verify(ownerRepository, times(1)).delete(any());
     }
 
     @Test
     void deleteById() {
+        //arrange
+
+        //act
+        service.deleteById(ID);
+
+        //assert
+        verify(ownerRepository, times(1)).deleteById(anyLong());
     }
 }
