@@ -1,8 +1,5 @@
 package com.improving.sfgpetclinic;
 
-import com.improving.sfgpetclinic.models.Visit;
-import com.improving.sfgpetclinic.services.map.VisitServiceMap;
-import com.improving.sfgpetclinic.services.springdatajpa.VisitJPAService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

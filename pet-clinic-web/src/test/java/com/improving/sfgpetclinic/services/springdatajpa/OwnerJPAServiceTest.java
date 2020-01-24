@@ -11,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -101,6 +99,35 @@ class OwnerJPAServiceTest {
     }
 
     @Test
+    void findAllByLastNameLikeReturnsOne(){
+        //arrange
+        List<Owner> owners = new ArrayList<>();
+        owners.add(returnedOwner);
+        when(ownerRepository.findAllByLastNameLikeIgnoreCase(anyString())).thenReturn(owners);
+
+        //act
+        List<Owner> returnedOwnerSet = service.findAllByLastNameLikeIgnoreCase(LAST_NAME);
+
+        //assert
+        assertEquals(1, returnedOwnerSet.size());
+    }
+
+    @Test
+    void findAllByLastNameLikeReturnsMany(){
+        //arrange
+        List<Owner> owners = new ArrayList<>();
+        owners.add(returnedOwner);
+        owners.add(Owner.builder().lastName("Smith").id(2L).build());
+        when(ownerRepository.findAllByLastNameLikeIgnoreCase(anyString())).thenReturn(owners);
+
+        //act
+        List<Owner> returnedOwnerSet = service.findAllByLastNameLikeIgnoreCase(LAST_NAME);
+
+        //assert
+        assertEquals(2, returnedOwnerSet.size());
+    }
+
+    @Test
     void saveExisitingID() {
         //arrange
         Owner ownerToSave = Owner.builder().id(3L).build();
@@ -147,4 +174,6 @@ class OwnerJPAServiceTest {
         //assert
         verify(ownerRepository, times(1)).deleteById(anyLong());
     }
+
+
 }
