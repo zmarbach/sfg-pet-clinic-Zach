@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.improving</groupId>
-	<artifactId>sfg-pet-clinic</artifactId>
+	<artifactId>sfg-pet-clinic-Zach</artifactId>
 	<version>0.0.1</version>
 
     <modules>
@@ -13,7 +13,7 @@
 
 	<packaging>pom</packaging>
 
-	<name>sfg-pet-clinic</name>
+	<name>sfg-pet-clinic-Zach</name>
 	<description>Demo project for Spring Boot</description>
 
     <parent>
@@ -25,8 +25,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
-
 
 	<build>
 		<plugins>
@@ -48,7 +48,7 @@
 	</build>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/zmarbach/sfg-pet-clinic.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/zmarbach/sfg-pet-clinic-Zach.git</developerConnection>
 	  <tag>sfg-pet-clinic-0.0.1</tag>
   </scm>
 
