@@ -30,6 +30,8 @@ public class VisitController {
     public void dataBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
 
+        //ANY LocalDate property coming through Visit controller will be handled here
+        //If it is a String, it will be parsed into LocalDate
         dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException{
